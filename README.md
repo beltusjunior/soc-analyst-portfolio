@@ -4,11 +4,7 @@ Welcome to my SOC analyst portfolio. This repository contains documented investi
 
 ## What's Inside
 
-Real malicious threats investigated using professional SOC tools:
-- **IP Investigations** - Analyzing malicious IP addresses with threat intelligence
-- **Phishing Email Analysis** - Security analysis of phishing attempts
-- **Malware Analysis** - File and hash analysis
-- **Log Analysis** - Suspicious log investigation and decoding
+Real malicious threats investigated using professional SOC tools and industry-standard techniques.
 
 ---
 
@@ -38,7 +34,6 @@ Real malicious threats investigated using professional SOC tools:
 
 ✓ Threat intelligence research  
 ✓ IP reputation analysis  
-✓ Email security investigation  
 ✓ Risk assessment  
 ✓ Incident response procedures  
 ✓ Professional documentation  
