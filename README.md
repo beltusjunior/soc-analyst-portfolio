@@ -15,7 +15,13 @@ Real malicious threats investigated using professional SOC tools:
 ## Investigations Completed
 
 ### IP Investigations
-*Updates as I complete investigations*
+
+**Investigation 1: 157.66.224.37 - Active Brute Force Attacker**
+- Status: Complete (September 19, 2026)
+- Verdict: CRITICAL THREAT - Active malicious activity
+- Tools used: AbuseIPDB, VirusTotal, Shodan, WHOIS
+- Time spent: 45 minutes
+- [View full investigation](./IP-Investigation-001/INVESTIGATION.md)
 
 ---
 
@@ -25,8 +31,6 @@ Real malicious threats investigated using professional SOC tools:
 - **VirusTotal** - File and URL analysis  
 - **Shodan** - Internet-facing service discovery
 - **WHOIS** - Domain/IP geolocation
-- **MXToolbox** - Email header analysis
-- **CyberChef** - Log decoding
 
 ---
 
@@ -41,4 +45,4 @@ Real malicious threats investigated using professional SOC tools:
 
 ---
 
-**Last Updated:** January 2024
+**Last Updated:** September 19, 2026
