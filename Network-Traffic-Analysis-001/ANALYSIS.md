@@ -13,7 +13,7 @@
 
 ## ⚠️ About this capture — it is synthetic
 
-This capture was **generated in a sandbox** by [`generate_capture.py`](generate_capture.py). No real host was scanned or logged into, and no passwords were guessed. The script fabricates packet metadata (IP addresses, ports, TCP flags, timestamps) so the file can be opened and analysed in Wireshark exactly like a live capture.
+This capture was **generated in a sandbox** — the packet metadata (IP addresses, ports, TCP flags, timestamps) is fabricated so the file can be opened and analysed in Wireshark exactly like a live capture. No real host was scanned or logged into, and no passwords were guessed.
 
 I built it to practise and demonstrate **network forensics** on the same attack pattern seen in [`IP-Investigation-001`](../IP-Investigation-001) — attacker `157.66.224.37` brute forcing SSH — without attacking anything. The analysis workflow, filters, and conclusions below are identical to what I would run on a real capture.
 
@@ -122,10 +122,12 @@ Every failed attempt is ~10 frames and lasts ~0.2 seconds. **One session — sou
 
 ---
 
-## Reproduce
+## Reproduce the analysis
+
+The capture (`ssh-bruteforce.pcap`) is included in this folder. Open it in
+Wireshark, or run the same analysis from the command line:
 
 ```bash
-pip install scapy
-python3 generate_capture.py        # writes ssh-bruteforce.pcap
-tshark -r ssh-bruteforce.pcap -q -z conv,tcp
+tshark -r ssh-bruteforce.pcap -q -z conv,tcp      # conversation durations
+tshark -r ssh-bruteforce.pcap -q -z io,phs         # protocol hierarchy
 ```
