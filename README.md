@@ -105,6 +105,13 @@ Each investigation is turned into reusable detection content in
 - **Sigma:** SSH brute force, Linux kworker masquerade, phishing domain access.
 - **IOCs:** consolidated machine-readable list — [`Detections/iocs.csv`](Detections/iocs.csv).
 
+## Tools *(new)*
+
+- **[`Tools/ip-enrichment/`](Tools/ip-enrichment/README.md)** — a command-line
+  IP enrichment tool (Python, stdlib only) that correlates **AbuseIPDB +
+  VirusTotal + RDAP/WHOIS** into a single verdict. Automates the manual lookup
+  workflow from the IP investigation — one command instead of three websites.
+
 ---
 
 ## Skills Demonstrated
