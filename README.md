@@ -25,7 +25,16 @@ querying, network forensics, detection engineering, and incident response.
 Each investigation folder holds a markdown report + the screenshots behind it,
 and follows the same flow: **Summary → IOCs → MITRE ATT&CK → Detection → Response**.
 The [`Detections/`](Detections/README.md) folder turns the findings into reusable
-Splunk and Sigma rules. Start with whichever case matches the skill you want to see:
+Splunk and Sigma rules.
+
+**New here? Start with these three:** the
+[malware analysis + incident-response report](Malware-Analysis-001/INCIDENT-RESPONSE.md)
+(my most complete case), the
+[SSH brute-force packet analysis](Network-Traffic-Analysis-001/ANALYSIS.md)
+(reading an attack on the wire), and the
+[IP investigation](IP-Investigation-001/INVESTIGATION.md) (multi-source threat intel).
+
+Or jump to whichever skill you want to see:
 
 | Skill | Best case to read |
 |-------|-------------------|
