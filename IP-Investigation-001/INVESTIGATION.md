@@ -103,16 +103,6 @@ The detection searches for this case are in [`../Detections`](../Detections):
 
 ---
 
-## Automation
-
-To show this enrichment can be done programmatically rather than by hand, I built
-a small command-line tool that correlates all three intel sources into one
-verdict: [`../Tools/ip-enrichment`](../Tools/ip-enrichment/README.md)
-(`python3 ip_enrich.py 157.66.224.37`). One command pulls AbuseIPDB, VirusTotal,
-and RDAP/WHOIS and weighs them together — the same workflow, automated.
-
----
-
 ## Lessons Learned
 
 - Check several reputation sources. VirusTotal gave **1/89**, while AbuseIPDB showed **12 reports in 9 days**.
