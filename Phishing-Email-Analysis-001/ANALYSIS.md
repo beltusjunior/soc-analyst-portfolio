@@ -2,10 +2,24 @@
 
 ## Target URL: oluwaburnazip--renusharawat.replit.app
 
-**Analysis Date:** September 19, 2026  
-**Time Spent:** 30 minutes  
-**Status:** Complete  
-**Threat Level:** HIGH
+**Analyst:** Beltus Bejanga
+**Analysis Date:** September 19, 2026
+**Time Spent:** 30 minutes
+**Status:** Complete
+**Threat Level:** HIGH (verified active phishing; raise to Critical if any user in your org received or clicked the link)
+
+---
+
+## Indicators of Compromise
+
+| Type | Indicator |
+|------|-----------|
+| Domain | `oluwaburnazip--renusharawat.replit.app` |
+| URL | `https://oluwaburnazip--renusharawat.replit.app/` |
+| PhishTank ID | #9528356 (Verified: *Is a phish*, 100%) |
+
+**MITRE ATT&CK:** Phishing — Spearphishing Link (T1566.002)
+**Detection:** [`../Detections/sigma/phishing_replit_domain.yml`](../Detections/sigma/phishing_replit_domain.yml)
 
 ---
 
@@ -106,9 +120,9 @@ https://oluwaburnazip--renusharawat.replit.app/
 6. ✓ Uses HTTPS (fake security to gain trust)
 7. ✓ Recently deployed (attack is fresh and active)
 
-### Threat Level: CRITICAL
+### Threat Level: HIGH (Critical in-context)
 
-This phishing site is actively deceiving users and is undetected by traditional security tools.
+On its own this is a HIGH-severity verified phishing site: active, and invisible to antivirus. It becomes **Critical for your organization** the moment you confirm a user received or clicked the link — at that point treat it as a potential account compromise.
 
 ---
 

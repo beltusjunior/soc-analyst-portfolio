@@ -1,148 +1,105 @@
-# SOC Analyst Portfolio - Real Threat Investigations
+# SOC Analyst Portfolio — Real Threat Investigations
 
-A professional portfolio demonstrating hands-on security operations center (SOC) skills through real threat intelligence investigations and SIEM analysis.
+A hands-on portfolio demonstrating security operations center (SOC) skills:
+threat intelligence investigation, malware triage, phishing analysis, SIEM
+querying, network forensics, and turning each investigation into reusable
+detection content.
 
 ## Portfolio Overview
 
-**Total Investigations:** 4  
-**Threats Identified:** 4/4 CRITICAL  
-**Time Invested:** 2+ hours  
-**Tools Used:** 10+ security platforms  
-**Training:** Splunk Certified (What is Splunk? - eLearning)
+| | |
+|---|---|
+| **Investigations** | 5 (IP, phishing, malware, SIEM, network forensics) |
+| **Detection content** | 2 Splunk searches + 3 Sigma rules + consolidated IOC list |
+| **Tools used** | AbuseIPDB, VirusTotal, Shodan, WHOIS, PhishTank, URLhaus, AlienVault OTX, Splunk, Wireshark/tshark |
+| **Analyst** | Beltus Bejanga — Thorold, Ontario, Canada |
 
 ---
 
-## Investigations Completed
+## Investigations
 
-### 1. IP Investigation - 157.66.224.37
-**Active Brute Force Attacker from Vietnam**
-- Analyzed malicious IP using AbuseIPDB, VirusTotal, Shodan, WHOIS
-- Found: 12 abuse reports, port scanning, SSH brute force attacks
-- Verdict: CRITICAL THREAT - Active attacker in real-time
-- Location: Quy Nhon City, Vietnam (HOAVPS-VN)
+### 1. IP Investigation — `157.66.224.37`
+Scanning / brute-force source (VPS in Vietnam, AS150895 / HOAVPS-VN). 12 AbuseIPDB
+reports from 11 sources; reporters show the main target is **RDP (3389)** and SSH.
+Shodan shows no services — disposable attack infrastructure.
+**Verdict:** Malicious (High). → [`IP-Investigation-001/`](IP-Investigation-001/INVESTIGATION.md)
 
-**Files:** `/IP-Investigation-001/`
+### 2. Phishing Analysis — `oluwaburnazip--renusharawat.replit.app`
+Verified phishing (PhishTank #9528356, 100%) hosted on free Replit infrastructure,
+**0/89 AV detections** — new and undetected, which makes it *more* dangerous.
+**Verdict:** Verified active phishing (High, Critical in-context). → [`Phishing-Email-Analysis-001/`](Phishing-Email-Analysis-001/ANALYSIS.md)
 
----
+### 3. Malware Analysis — `whack.sh`
+Linux ELF dropper/stager, **28/64** VT detections. In-memory execution via
+`memfd_create`→`fexecve`, XOR-decrypted payload (key `0x99`), C2 at `82.157.13.47`,
+masquerades as `[kworker/0:2]`.
+**Verdict:** Critical. → [`Malware-Analysis-001/`](Malware-Analysis-001/REPORT.md)
 
-### 2. Phishing Email Analysis - oluwaburnazip--renusharawat.replit.app
-**Active Phishing Site (Zero AV Detections)**
-- Analyzed phishing URL using PhishTank, VirusTotal, URLhaus
-- Found: 100% verified phishing, ONLINE, newly deployed
-- Verdict: CRITICAL THREAT - Bypassing antivirus detection
-- Key Insight: Human verification caught what AV engines missed
+### 4. Splunk SIEM Analysis — Internal Audit Logs
+9,427 audit events analysed with SPL and the `internal_audit_logs` data model;
+action breakdown and interpretation. Skills demo on benign sample data.
+→ [`Splunk-SIEM-Analysis-001/`](Splunk-SIEM-Analysis-001/ANALYSIS.md)
 
-**Files:** `/Phishing-Email-Analysis-001/`
-
----
-
-### 3. Malware Analysis - whack.sh
-**Hash:** `36dabc40fa8983ce900a90b8156d2c754875fe1b5413a997843c4a0ef3908220`
-- Analyzed Linux dropper/stager using AlienVault OTX, VirusTotal
-- Found: 28/64 vendors flagged, memory-only execution, C2 communication
-- Verdict: CRITICAL THREAT - Sophisticated multi-stage malware
-- Behavior: Process masquerading, XOR encryption, in-memory payload
-
-**Files:** `/Malware-Analysis-001/`
+### 5. Network Traffic Analysis — SSH Brute Force → Compromise *(new)*
+Packet forensics on a **synthetic, lab-generated** capture modelling the attacker
+from case 1. tshark analysis finds **41 connection attempts, 40 resets, and 1
+sustained 30-second session** — the single successful login hiding in the burst.
+→ [`Network-Traffic-Analysis-001/`](Network-Traffic-Analysis-001/ANALYSIS.md)
 
 ---
 
-### 4. Splunk SIEM Analysis - Internal Audit Logs
-**9,427 Audit Events Analyzed**
-- Analyzed Splunk's internal audit logs using Splunk Enterprise
-- Found: Action breakdown, admin activity patterns, audit trail analysis
-- Skills: SIEM querying, data model understanding, report generation
-- Verdict: Demonstrated core SOC competencies - data exploration, pattern analysis, threat interpretation
+## Detections *(new)*
 
-**Certification:** What is Splunk? (eLearning) - March 5, 2023
+Each investigation is turned into reusable detection content in
+[`Detections/`](Detections/README.md):
 
-**Files:** `/Splunk-SIEM-Analysis-001/`
-
----
-
-## Tools & Platforms Used
-
-| Category | Tools |
-|----------|-------|
-| **Threat Intelligence** | AbuseIPDB, VirusTotal, AlienVault OTX |
-| **Infrastructure Mapping** | Shodan, WHOIS, URLhaus |
-| **Phishing Detection** | PhishTank |
-| **SIEM Platform** | Splunk Enterprise |
-| **Malware Analysis** | VirusTotal, AlienVault OTX |
+- **Splunk:** brute-force-to-success correlation (SSH + RDP); portfolio-wide IOC sweep.
+- **Sigma:** SSH brute force, Linux kworker masquerade, phishing domain access.
+- **IOCs:** consolidated machine-readable list — [`Detections/iocs.csv`](Detections/iocs.csv).
 
 ---
 
 ## Skills Demonstrated
 
-**Threat Investigation:**
-- ✅ IP reputation analysis & geolocation
-- ✅ Phishing site identification & verification
-- ✅ Malware hash analysis & behavior assessment
-- ✅ Multi-source threat intelligence correlation
-
-**SIEM & Log Analysis:**
-- ✅ Splunk platform navigation
-- ✅ SPL query construction
-- ✅ Audit log interpretation
-- ✅ Data visualization & reporting
-- ✅ SIEM data model understanding
-
-**SOC Operations:**
-- ✅ Threat hunting methodology
-- ✅ Incident investigation workflow
-- ✅ Risk assessment & severity determination
-- ✅ Pattern analysis & anomaly detection
+**Threat Intelligence:** IP reputation & geolocation, phishing verification, malware
+hash/behaviour triage, multi-source correlation, IOC extraction.
+**SIEM & Detection Engineering:** SPL queries, data models, Sigma rule authoring,
+alert threshold tuning, MITRE ATT&CK mapping.
+**Network Forensics:** Wireshark/tshark, conversation & flag analysis, reading a
+brute-force-to-compromise pattern on the wire.
+**SOC Operations:** investigation workflow, severity assessment, containment &
+response planning, honest reporting (no over-claimed attribution).
 
 ---
 
-## Training & Certifications
+## Methodology
 
-- **Splunk Certified:** What is Splunk? (eLearning)
-- **Date Completed:** March 5, 2023
-- **Certificate:** `Certificate_of_Splunk_Completion.pdf`
-
----
-
-## Investigation Methodology
-
-Each investigation follows this workflow:
-1. **Reconnaissance** - Gather intelligence on the threat
-2. **Analysis** - Use multiple tools to verify findings
-3. **Documentation** - Screenshot and record all findings
-4. **Verdict** - Determine severity and threat level
-5. **Conclusion** - Summarize findings for SOC team
+Each investigation follows: **Recon → Analysis (multiple tools) → Documentation
+(screenshots + IOCs) → Verdict (severity) → Detection & Response.** All cases use
+real, verifiable data except the network capture, which is clearly labelled as a
+lab-generated synthetic file.
 
 ---
 
-## About This Portfolio
+## Training
 
-This portfolio demonstrates the practical skills required for an **entry-level SOC analyst:**
-- Ability to use multiple threat intelligence platforms
-- Understanding of malware analysis and indicators of compromise (IOCs)
-- SIEM platform competency
-- Real-time threat detection and investigation
-- Thorough documentation of findings
-
-All investigations use **real, verifiable data** - no fabricated scenarios.
+- **Course completed:** Splunk — *"What is Splunk?"* (free eLearning), March 5, 2023.
+  Certificate: [`Splunk-SIEM-Analysis-001/Certificate_of_Splunk_Completion.pdf`](Splunk-SIEM-Analysis-001/Certificate_of_Splunk_Completion.pdf).
+  *(This is an introductory course completion, not a professional Splunk certification.)*
 
 ---
 
 ## Next Steps
 
-Expanding portfolio with:
-- Advanced malware analysis (behavioral detonation)
-- Network traffic analysis (Wireshark, Zeek)
-- Log correlation & alert tuning
-- Incident response playbooks
+- Behavioural malware detonation in an isolated sandbox
+- Zeek/Suricata analysis of live-style captures
+- Incident response playbooks and alert tuning write-ups
 
 ---
 
-**Last Updated:** September 20, 2026  
-**Portfolio Owner:** Beltus Bejanga  
-**Location:** Thorold, Ontario, Canada
+**Last Updated:** October 6, 2026
+**Portfolio Owner:** Beltus Bejanga — Thorold, Ontario, Canada
 
----
-
-### Contact & Links
+### Contact
 - GitHub: [@beltusjunior](https://github.com/beltusjunior)
-  https://www.linkedin.com/in/tchatchoua-beltus-bejanga-88475b242/?isSelfProfile=true
+- LinkedIn: [Tchatchoua Beltus Bejanga](https://www.linkedin.com/in/tchatchoua-beltus-bejanga-88475b242/)
