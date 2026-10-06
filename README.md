@@ -13,7 +13,7 @@ querying, network forensics, detection engineering, and incident response.
 
 | | |
 |---|---|
-| **Investigations** | 6 — IP, phishing, malware, SIEM, network forensics, network discovery |
+| **Investigations** | 8 — IP, phishing, malware, SIEM, network forensics (×3), network discovery |
 | **Detection content** | 2 Splunk searches + 3 Sigma rules + consolidated IOC list |
 | **Incident response** | 1 full IR report (SANS PICERL lifecycle) |
 | **Frameworks** | MITRE ATT&CK mapping on every case; CIS / NIST references |
@@ -73,7 +73,20 @@ sustained 30-second session** — the single successful login hiding in the burs
 
 ---
 
-### 6. Network Discovery & Asset Inventory — Home LAN *(new, real data)*
+### 6. Network Traffic Analysis — Live TLS 1.3 Capture *(real data)*
+Real Wireshark capture of my own machine: a TCP handshake + **TLS 1.3** session to
+`ecs.office.com`. Key takeaway — the encrypted session still leaks the **SNI**
+(destination domain) in cleartext, which is how a SOC detects bad traffic without
+breaking TLS. Own IP/MACs redacted.
+→ [`Network-Traffic-Analysis-002/`](Network-Traffic-Analysis-002/ANALYSIS.md)
+
+### 7. Network Traffic Analysis — DNS Queries *(real data)*
+Real Wireshark capture of my own DNS traffic: A/AAAA/CNAME records resolving Teams,
+Bing, Copilot, Google, and Windows telemetry through Azure/Akamai CDNs. Explains why
+DNS is a SOC's richest hunting ground (DGA, tunnelling, C2) and how to spot each.
+→ [`Network-Traffic-Analysis-003/`](Network-Traffic-Analysis-003/ANALYSIS.md)
+
+### 8. Network Discovery & Asset Inventory — Home LAN *(real data)*
 Advanced IP Scanner sweep of **my own** network: 22 live hosts across 4 subnets.
 Built an asset inventory, identified an IoT segmentation gap, and flagged a
 **Hikvision** camera against a known CVE. MACs/serials redacted before publishing.
