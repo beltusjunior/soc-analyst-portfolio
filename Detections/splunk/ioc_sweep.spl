@@ -1,0 +1,44 @@
+* Detection: Portfolio IOC sweep — hunt every indicator from this portfolio at once
+* Author:    Beltus Bejanga
+* Related:   IP-Investigation-001, Malware-Analysis-001, Phishing-Email-Analysis-001
+* Data:      Firewall / proxy / DNS / EDR logs. Adjust index + field names to your env.
+* Idea:      One scheduled search that lights up if ANY known-bad indicator appears
+*            anywhere in the environment.
+
+---------------------------------------------------------------------------
+ Network indicators — attacker + C2 IPs, phishing domain
+---------------------------------------------------------------------------
+index=* (
+      src_ip IN ("157.66.224.37","82.157.13.47")
+   OR dest_ip IN ("157.66.224.37","82.157.13.47")
+   OR query="*oluwaburnazip--renusharawat.replit.app*"
+   OR url="*oluwaburnazip--renusharawat.replit.app*"
+)
+| eval ioc=coalesce(dest_ip,src_ip,query,url)
+| eval ioc_type=case(
+      ioc=="157.66.224.37","Brute-force source (IP-Investigation-001)",
+      ioc=="82.157.13.47","Malware C2 (Malware-Analysis-001)",
+      like(ioc,"%replit.app%"),"Phishing site (Phishing-Email-Analysis-001)")
+| stats count min(_time) as first max(_time) as last
+        values(host) as hosts values(user) as users by ioc ioc_type
+| eval first=strftime(first,"%F %T"), last=strftime(last,"%F %T")
+| sort - count
+
+---------------------------------------------------------------------------
+ File hash indicator — whack.sh dropper (needs EDR / Sysmon-for-Linux hashes)
+---------------------------------------------------------------------------
+ index=* (
+       file_hash="36dabc40fa8983ce900a90b8156d2c754875fe1b5413a997843c4a0ef3908220"
+    OR sha256="36dabc40fa8983ce900a90b8156d2c754875fe1b5413a997843c4a0ef3908220"
+ )
+ | stats count values(host) as hosts values(process) as processes by file_hash
+ | eval verdict="whack.sh dropper present — ISOLATE host, preserve memory"
+
+---------------------------------------------------------------------------
+ Host behaviour — whack.sh masquerades as a kernel worker thread
+ (a REAL [kworker/...] is a kernel thread with no executable image on disk;
+  a userland process using that name is the giveaway)
+---------------------------------------------------------------------------
+ index=* sourcetype=sysmon_linux EventID=1 process_name="[kworker/*"
+ | stats count values(parent_process) as parents values(process_path) as paths by host process_name
+ | eval verdict="Process masquerading as kernel worker — investigate immediately"
