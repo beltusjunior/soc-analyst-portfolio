@@ -2,17 +2,41 @@
 
 A hands-on portfolio demonstrating security operations center (SOC) skills:
 threat intelligence investigation, malware triage, phishing analysis, SIEM
-querying, network forensics, and turning each investigation into reusable
-detection content.
+querying, network forensics, detection engineering, and incident response.
+
+![Investigations](https://img.shields.io/badge/Investigations-6-2b6cb0)
+![Detections](https://img.shields.io/badge/Detections-Splunk%20%2B%20Sigma-6b46c1)
+![Framework](https://img.shields.io/badge/Mapped%20to-MITRE%20ATT%26CK-c53030)
+![IR](https://img.shields.io/badge/Incident%20Response-SANS%20PICERL-2f855a)
 
 ## Portfolio Overview
 
 | | |
 |---|---|
-| **Investigations** | 6 (IP, phishing, malware, SIEM, network forensics, network discovery) |
+| **Investigations** | 6 — IP, phishing, malware, SIEM, network forensics, network discovery |
 | **Detection content** | 2 Splunk searches + 3 Sigma rules + consolidated IOC list |
-| **Tools used** | AbuseIPDB, VirusTotal, Shodan, WHOIS, PhishTank, URLhaus, AlienVault OTX, Splunk, Wireshark/tshark |
+| **Incident response** | 1 full IR report (SANS PICERL lifecycle) |
+| **Frameworks** | MITRE ATT&CK mapping on every case; CIS / NIST references |
+| **Tools used** | AbuseIPDB, VirusTotal, Shodan, WHOIS, PhishTank, URLhaus, AlienVault OTX, Splunk, Wireshark/tshark, Advanced IP Scanner |
 | **Analyst** | Beltus Bejanga — Thorold, Ontario, Canada |
+
+### How to read this portfolio
+
+Each investigation folder holds a markdown report + the screenshots behind it,
+and follows the same flow: **Summary → IOCs → MITRE ATT&CK → Detection → Response**.
+The [`Detections/`](Detections/README.md) folder turns the findings into reusable
+Splunk and Sigma rules. Start with whichever case matches the skill you want to see:
+
+| Skill | Best case to read |
+|-------|-------------------|
+| Threat intelligence | IP-Investigation-001 |
+| Phishing analysis | Phishing-Email-Analysis-001 |
+| Malware triage | Malware-Analysis-001 |
+| **Incident response** | Malware-Analysis-001 → [INCIDENT-RESPONSE.md](Malware-Analysis-001/INCIDENT-RESPONSE.md) |
+| SIEM / SPL | Splunk-SIEM-Analysis-001 |
+| Network forensics | Network-Traffic-Analysis-001 |
+| Asset discovery | Network-Discovery-001 |
+| Detection engineering | Detections/ |
 
 ---
 
@@ -34,6 +58,7 @@ Linux ELF dropper/stager, **28/64** VT detections. In-memory execution via
 `memfd_create`→`fexecve`, XOR-decrypted payload (key `0x99`), C2 at `82.157.13.47`,
 masquerades as `[kworker/0:2]`.
 **Verdict:** Critical. → [`Malware-Analysis-001/`](Malware-Analysis-001/REPORT.md)
+Includes a full **[incident-response report](Malware-Analysis-001/INCIDENT-RESPONSE.md)** (SANS PICERL lifecycle).
 
 ### 4. Splunk SIEM Analysis — Internal Audit Logs
 9,427 audit events analysed with SPL and the `internal_audit_logs` data model;
