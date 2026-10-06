@@ -1,0 +1,33 @@
+title: Access to Known Phishing Domain (replit.app lookalike)
+id: 8f3b1c20-5d4a-4a21-9f6e-portfolio0003
+status: experimental
+description: >
+  Detects DNS resolution or web requests to the verified phishing host
+  oluwaburnazip--renusharawat.replit.app (Phishing-Email-Analysis-001).
+  Also flags the broader abuse pattern of free-hosting subdomains using a
+  double hyphen, which attackers use to spin up throwaway phishing pages.
+author: Beltus Bejanga
+date: 2026/10/06
+references:
+  - https://www.phishtank.com/phish_detail.php?phish_id=9528356
+  - Phishing-Email-Analysis-001
+logsource:
+  category: dns
+detection:
+  known_bad:
+    query|contains: 'oluwaburnazip--renusharawat.replit.app'
+  # Hunting heuristic (higher FP rate — review, do not auto-block):
+  suspicious_pattern:
+    query|contains: '--'
+    query|endswith: '.replit.app'
+  condition: known_bad or suspicious_pattern
+fields:
+  - query
+  - src_ip
+level: high
+falsepositives:
+  - Legitimate Replit-hosted apps that happen to use a double hyphen in the name
+    (verify the destination before blocking the suspicious_pattern branch)
+tags:
+  - attack.initial_access
+  - attack.t1566.002

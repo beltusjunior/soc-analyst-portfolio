@@ -1,0 +1,36 @@
+title: SSH Brute Force Followed by Successful Login
+id: 8f3b1c20-5d4a-4a21-9f6e-portfolio0001
+status: experimental
+description: >
+  Detects a source IP that produces many failed SSH authentications and then a
+  successful one within a short window — the brute-force-to-compromise pattern
+  investigated in IP-Investigation-001 and Network-Traffic-Analysis-001.
+author: Beltus Bejanga
+date: 2026/10/06
+references:
+  - https://attack.mitre.org/techniques/T1110/001/
+  - IP-Investigation-001
+logsource:
+  product: linux
+  service: sshd
+detection:
+  failed:
+    message|contains: 'Failed password'
+  success:
+    message|contains: 'Accepted '
+  timeframe: 10m
+  # Correlation (fire when BOTH occur from the same src_ip in the window) is
+  # expressed by the backend; see the Splunk version for the full stats logic.
+  condition: failed | count() by src_ip > 20 and success
+fields:
+  - src_ip
+  - user
+level: high
+tags:
+  - attack.credential_access
+  - attack.t1110.001
+  - attack.lateral_movement
+  - attack.t1021.004
+falsepositives:
+  - Vulnerability scanners and automated backup/jump hosts that retry logins
+  - Misconfigured service accounts with wrong cached credentials

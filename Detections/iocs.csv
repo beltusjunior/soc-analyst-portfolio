@@ -1,0 +1,9 @@
+indicator,type,context,case,verdict
+157.66.224.37,ipv4,SSH/RDP brute-force & scanning source (VPS in Vietnam),IP-Investigation-001,malicious
+157.66.224.0/23,cidr,Allocation containing attacker IP (HOAVPS-VN / AS150895),IP-Investigation-001,suspicious
+82.157.13.47,ipv4,Malware C2 server contacted by whack.sh dropper,Malware-Analysis-001,malicious
+36dabc40fa8983ce900a90b8156d2c754875fe1b5413a997843c4a0ef3908220,sha256,whack.sh Linux dropper/stager ELF (9.57 KB),Malware-Analysis-001,malicious
+oluwaburnazip--renusharawat.replit.app,domain,Verified phishing site hosted on Replit,Phishing-Email-Analysis-001,malicious
+https://oluwaburnazip--renusharawat.replit.app/,url,Verified phishing URL (PhishTank #9528356),Phishing-Email-Analysis-001,malicious
+[kworker/0:2],process_name,Masquerade name used by whack.sh to hide in process list,Malware-Analysis-001,malicious
+/tmp/log_de.log,filepath,Absence check performed by whack.sh before contacting C2,Malware-Analysis-001,suspicious
