@@ -9,7 +9,7 @@ detection content.
 
 | | |
 |---|---|
-| **Investigations** | 5 (IP, phishing, malware, SIEM, network forensics) |
+| **Investigations** | 6 (IP, phishing, malware, SIEM, network forensics, network discovery) |
 | **Detection content** | 2 Splunk searches + 3 Sigma rules + consolidated IOC list |
 | **Tools used** | AbuseIPDB, VirusTotal, Shodan, WHOIS, PhishTank, URLhaus, AlienVault OTX, Splunk, Wireshark/tshark |
 | **Analyst** | Beltus Bejanga — Thorold, Ontario, Canada |
@@ -45,6 +45,14 @@ Packet forensics on a **synthetic, lab-generated** capture modelling the attacke
 from case 1. tshark analysis finds **41 connection attempts, 40 resets, and 1
 sustained 30-second session** — the single successful login hiding in the burst.
 → [`Network-Traffic-Analysis-001/`](Network-Traffic-Analysis-001/ANALYSIS.md)
+
+---
+
+### 6. Network Discovery & Asset Inventory — Home LAN *(new, real data)*
+Advanced IP Scanner sweep of **my own** network: 22 live hosts across 4 subnets.
+Built an asset inventory, identified an IoT segmentation gap, and flagged a
+**Hikvision** camera against a known CVE. MACs/serials redacted before publishing.
+→ [`Network-Discovery-001/`](Network-Discovery-001/ANALYSIS.md)
 
 ---
 
