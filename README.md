@@ -86,10 +86,12 @@ Bing, Copilot, Google, and Windows telemetry through Azure/Akamai CDNs. Explains
 DNS is a SOC's richest hunting ground (DGA, tunnelling, C2) and how to spot each.
 → [`Network-Traffic-Analysis-003/`](Network-Traffic-Analysis-003/ANALYSIS.md)
 
-### 8. Network Discovery & Asset Inventory — Home LAN *(real data)*
-Advanced IP Scanner sweep of **my own** network: 22 live hosts across 4 subnets.
-Built an asset inventory, identified an IoT segmentation gap, and flagged a
-**Hikvision** camera against a known CVE. MACs/serials redacted before publishing.
+### 8. Network Discovery on a Shared Network *(real data)*
+Passive host discovery on the **shared, landlord-provided** network my devices connect
+to (22 live hosts). The real finding: my PC and phone sit on a flat network with ~20
+devices I don't control — so I treat it as **untrusted** and harden my own devices,
+rather than touching equipment that isn't mine. Demonstrates correctly scoping
+authority and threat-modeling my own exposure. MACs/serials redacted.
 → [`Network-Discovery-001/`](Network-Discovery-001/ANALYSIS.md)
 
 ---
