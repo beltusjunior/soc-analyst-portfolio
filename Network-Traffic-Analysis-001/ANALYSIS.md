@@ -29,6 +29,10 @@ I built it to practise and demonstrate **network forensics** on the same attack 
 
 ## Analysis Walkthrough
 
+![tshark analysis of ssh-bruteforce.pcap](01-tshark-analysis.png)
+
+*Full `tshark`/`capinfos` session: 41 connection attempts, 40 resets (failures), and one 30-second session (the compromise) standing out from the burst.*
+
 ### 1. Capture overview — `capinfos`
 
 ```
