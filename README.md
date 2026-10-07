@@ -13,7 +13,7 @@ querying, network forensics, detection engineering, and incident response.
 
 | | |
 |---|---|
-| **Investigations** | 8 — IP, phishing, malware, SIEM, network forensics (×3), network discovery |
+| **Investigations** | 9 — IP, phishing (×2), malware, SIEM, network forensics (×3), network discovery |
 | **Detection content** | 2 Splunk searches + 3 Sigma rules + consolidated IOC list |
 | **Incident response** | 1 full IR report (SANS PICERL lifecycle) |
 | **Frameworks** | MITRE ATT&CK mapping on every case; CIS / NIST references |
@@ -95,7 +95,15 @@ Bing, Copilot, Google, and Windows telemetry through Azure/Akamai CDNs. Explains
 DNS is a SOC's richest hunting ground (DGA, tunnelling, C2) and how to spot each.
 → [`Network-Traffic-Analysis-003/`](Network-Traffic-Analysis-003/ANALYSIS.md)
 
-### 8. Network Discovery on a Shared Network *(real data)*
+### 8. Phishing Email Forensics — iCloud Impersonation *(real data)*
+Raw email-header analysis of a real phishing email from my inbox. Key lesson:
+**SPF passed and it was still phishing** — because the attacker owns the sending
+domain, and email auth validates the domain, not the impersonated brand. Covers
+display-name spoofing, disposable infrastructure, URL-shortener obfuscation, and
+an open-tracking pixel. Personal routing redacted, URLs defanged.
+→ [`Phishing-Email-Analysis-002/`](Phishing-Email-Analysis-002/ANALYSIS.md)
+
+### 9. Network Discovery on a Shared Network *(real data)*
 Passive host discovery on the **shared, landlord-provided** network my devices connect
 to (22 live hosts). The real finding: my PC and phone sit on a flat network with ~20
 devices I don't control — so I treat it as **untrusted** and harden my own devices,

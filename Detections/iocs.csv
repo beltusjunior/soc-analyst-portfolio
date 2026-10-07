@@ -7,3 +7,8 @@ oluwaburnazip--renusharawat.replit.app,domain,Verified phishing site hosted on R
 https://oluwaburnazip--renusharawat.replit.app/,url,Verified phishing URL (PhishTank #9528356),Phishing-Email-Analysis-001,malicious
 [kworker/0:2],process_name,Masquerade name used by whack.sh to hide in process list,Malware-Analysis-001,malicious
 /tmp/log_de.log,filepath,Absence check performed by whack.sh before contacting C2,Malware-Analysis-001,suspicious
+vipcampus.sbs,domain,Phishing sender domain impersonating Apple/iCloud,Phishing-Email-Analysis-002,malicious
+66.55.83.9,ipv4,Phishing email sending server,Phishing-Email-Analysis-002,malicious
+netexcom.click,domain,Phishing sending/message-id infrastructure,Phishing-Email-Analysis-002,malicious
+timestart.store,domain,Open-tracking pixel host for phishing campaign,Phishing-Email-Analysis-002,malicious
+https://tinyurl.com/yc4enenr,url,Shortened phishing link (credential harvesting),Phishing-Email-Analysis-002,malicious
